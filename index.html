@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catrina Wright | Special Educator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --linen:       #fdf8f2;
+            --linen-warm:  #f7f0e6;
+            --linen-deep:  #ede4d5;
+            --linen-bdr:   #d9cdb8;
+            --toffee:      #7a4f2d;
+            --toffee-mid:  #9b6540;
+            --toffee-lt:   #b8845a;
+            --honey:       #c98c30;
+            --honey-lt:    #e0aa52;
+            --honey-pale:  #fdf0d8;
+            --sage:        #4d7868;
+            --sage-lt:     #d5ebe4;
+            --sienna:      #a05535;
+            --sienna-pale: #faeae0;
+            --slate:       #3d5166;
+            --slate-mid:   #546a80;
+            --body:        #3d2e1e;
+            --muted:       #8a7460;
+            --white:       #ffffff;
+            --shadow-sm:  0 2px 10px rgba(122,79,45,0.08);
+            --shadow-md:  0 6px 28px rgba(122,79,45,0.11);
+            --shadow-lg:  0 16px 52px rgba(122,79,45,0.14);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--linen);
+            color: var(--body);
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 16.5px;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 300;
+            background: var(--white);
+            border-bottom: 3px solid var(--honey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem; color: var(--toffee); letter-spacing: 0.03em; }
+        .nav-brand em { font-style: italic; color: var(--honey); }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding-bottom: 2px; border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .nav-links a:hover { color: var(--honey); border-bottom-color: var(--honey); }
+
+        #hero { background: var(--slate); padding: 9rem 4rem 7rem; position: relative; overflow: hidden; }
+
+        #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 75% at 90% 15%, rgba(201,140,48,0.22) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 10% 90%, rgba(77,120,104,0.12) 0%, transparent 55%); pointer-events: none; }
+
+        #hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--sage), var(--honey) 50%, var(--sienna)); }
+
+        .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+
+        .hero-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--honey-lt); margin-bottom: 1.75rem; opacity: 0; animation: riseIn 0.9s ease forwards 0.2s; }
+
+        .hero-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(3.8rem, 8.5vw, 7rem); line-height: 0.96; color: var(--white); margin-bottom: 1.5rem; opacity: 0; animation: riseIn 0.9s ease forwards 0.38s; }
+        .hero-name em { display: block; font-style: italic; color: var(--honey-lt); }
+
+        .hero-divider { width: 52px; height: 3px; background: linear-gradient(90deg, var(--honey), var(--honey-lt)); border-radius: 2px; margin-bottom: 1.5rem; opacity: 0; animation: riseIn 0.8s ease forwards 0.55s; }
+
+        .hero-credential { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 1.85rem; opacity: 0; animation: riseIn 0.8s ease forwards 0.6s; }
+
+        .hero-tagline { font-size: 1.08rem; color: rgba(255,255,255,0.82); line-height: 1.9; max-width: 540px; margin-bottom: 2.75rem; opacity: 0; animation: riseIn 0.9s ease forwards 0.75s; }
+
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: riseIn 0.9s ease forwards 0.92s; }
+
+        .hero-panels { display: flex; flex-direction: column; gap: 1rem; opacity: 0; animation: riseIn 1s ease forwards 1.05s; }
+
+        .hero-panel { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-left: 3px solid var(--honey); padding: 1.35rem 1.75rem; backdrop-filter: blur(8px); }
+
+        .panel-val { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 700; color: var(--honey-lt); line-height: 1; margin-bottom: 0.3rem; }
+        .panel-desc { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.82rem 2rem; font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all 0.25s ease; }
+
+        .btn-honey { background: var(--honey); color: var(--white); border-radius: 4px; }
+        .btn-honey:hover { background: var(--honey-lt); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,140,48,0.38); }
+
+        .btn-sage { background: var(--sage); color: var(--white); border-radius: 4px; }
+        .btn-sage:hover { background: #3d6358; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(77,120,104,0.38); }
+
+        .btn-ghost { background: transparent; color: rgba(255,255,255,0.82); border: 1px solid rgba(255,255,255,0.28); border-radius: 4px; }
+        .btn-ghost:hover { border-color: var(--honey-lt); color: var(--honey-lt); transform: translateY(-2px); }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+        section { padding: 6.5rem 4rem; }
+
+        .section-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--honey); margin-bottom: 0.6rem; }
+
+        .section-heading { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(2.1rem, 4vw, 3.2rem); color: var(--toffee); line-height: 1.1; margin-bottom: 3rem; }
+
+        #about { background: var(--white); border-bottom: 1px solid var(--linen-bdr); }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 0.55fr; gap: 5rem; align-items: start; }
+
+        .about-left { display: flex; flex-direction: column; gap: 2.5rem; }
+
+        .about-photo-block { display: flex; gap: 2rem; align-items: flex-start; }
+
+        .about-headshot { width: 160px; height: 160px; border-radius: 4px; object-fit: cover; object-position: center top; border: 3px solid var(--honey); flex-shrink: 0; box-shadow: var(--shadow-md); }
+
+        .about-name-block { display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; }
+
+        .about-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--toffee); line-height: 1.1; }
+        .about-name em { font-style: italic; color: var(--honey); }
+
+        .about-role { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+        .about-rule { width: 36px; height: 2px; background: var(--honey); margin: 0.5rem 0; }
+
+        .about-copy p { font-size: 1rem; color: var(--body); line-height: 1.92; margin-bottom: 1.35rem; }
+
+        .about-creds { display:flex; flex-direction:column; gap:1rem; }
+
+        .cred-tile { background: var(--linen-
