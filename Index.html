@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catrina Wright | Special Educator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --linen:       #fdf8f2;
+            --linen-warm:  #f7f0e6;
+            --linen-deep:  #ede4d5;
+            --linen-bdr:   #d9cdb8;
+            --toffee:      #7a4f2d;
+            --toffee-mid:  #9b6540;
+            --toffee-lt:   #b8845a;
+            --honey:       #c98c30;
+            --honey-lt:    #e0aa52;
+            --honey-pale:  #fdf0d8;
+            --sage:        #4d7868;
+            --sage-lt:     #d5ebe4;
+            --sienna:      #a05535;
+            --sienna-pale: #faeae0;
+            --slate:       #3d5166;
+            --slate-mid:   #546a80;
+            --body:        #3d2e1e;
+            --muted:       #8a7460;
+            --white:       #ffffff;
+            --shadow-sm:  0 2px 10px rgba(122,79,45,0.08);
+            --shadow-md:  0 6px 28px rgba(122,79,45,0.11);
+            --shadow-lg:  0 16px 52px rgba(122,79,45,0.14);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--linen);
+            color: var(--body);
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 16.5px;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 300;
+            background: var(--white);
+            border-bottom: 3px solid var(--honey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--toffee);
+            letter-spacing: 0.03em;
+        }
+
+        .nav-brand em { font-style: italic; color: var(--honey); }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--honey); border-bottom-color: var(--honey); }
+
+        #hero {
+            background: var(--slate);
+            padding: 9rem 4rem 7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 65% 75% at 90% 15%, rgba(201,140,48,0.22) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 10% 90%, rgba(77,120,104,0.12) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--honey) 50%, var(--sienna));
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--honey-lt);
+            margin-bottom: 1.75rem;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.2s;
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(3.8rem, 8.5vw, 7rem);
+            line-height: 0.96;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.38s;
+        }
+
+        .hero-name em { display: block; font-style: italic; color: var(--honey-lt); }
+
+        .hero-divider {
+            width: 52px; height: 3px;
+            background: linear-gradient(90deg, var(--honey), var(--honey-lt));
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: riseIn 0.8s ease forwards 0.55s;
+        }
+
+        .hero-credential {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 1.85rem;
+            opacity: 0;
+            animation: riseIn 0.8s ease forwards 0.6s;
+        }
+
+        .hero-tagline {
+            font-size: 1.08rem;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.9;
+            max-width: 540px;
+            margin-bottom: 2.75rem;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.75s;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.92s;
+        }
+
+        .resume-note {
+            display: block;
+            margin-top: 0.85rem;
+            font-size: 0.68rem;
+            color: rgba(224,170,82,0.7);
+        }
+
+        .hero-panels {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0;
+            animation: riseIn 1s ease forwards 1.05s;
+        }
+
+        .hero-panel {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-left: 3px solid var(--honey);
+            padding: 1.35rem 1.75rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .panel-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--honey-lt);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .panel-desc { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.82rem 2rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-honey { background: var(--honey); color: var(--white); border-radius: 4px; }
+        .btn-honey:hover {
+            background: var(--honey-lt);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(201,140,48,0.38);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: rgba(255,255,255,0.82);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 4px;
+        }
+        .btn-ghost:hover { border-color: var(--honey-lt); color: var(--honey-lt); transform: translateY(-2px); }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+        section { padding: 6.5rem 4rem; }
+
+        .section-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--honey);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(2.1rem, 4vw, 3.2rem);
+            color: var(--toffee);
+            line-height: 1.1;
+            margin-bottom: 3rem;
+        }
+
+        #about { background: var(--white); border-bottom: 1px solid var(--linen-bdr); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-copy p {
+            font-size: 1rem;
+            color: var(--body);
+            line-height: 1.92;
+            margin-bottom: 1.35rem;
+        }
+
+        .about-creds { display:flex; flex-direction:column; gap:1rem; }
+
+        .cred-tile {
+            background: var(--linen-warm);
+            border: 1px solid var(--linen-bdr);
+            border-left: 3px solid var(--honey);
+            padding: 1.2rem 1.4rem;
+        }
+
+        .cred-label {
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--honey);
+            margin-bottom: 0.35rem;
+        }
+
+        .cred-text { font-size: 0.88rem; color: var(--toffee); line-height: 1.6; font-weight: 500; }
+
+        #philosophy {
+            background: var(--linen-warm);
+            border-top: 1px solid var(--linen-bdr);
+            border-bottom: 1px solid var(--linen-bdr);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #philosophy::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,140,48,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .phil-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+
+        .phil-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--honey);
+            margin-bottom: 2rem;
+        }
+
+        .phil-ornament {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9rem;
+            font-style: italic;
+            color: var(--honey);
+            opacity: 0.12;
+            line-height: 0.65;
+            margin-bottom: -1.5rem;
+            user-select: none;
+        }
+
+        .phil-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.7rem, 3.8vw, 2.8rem);
+            font-weight: 700;
+            font-style: italic;
+            color: var(--toffee);
+            line-height: 1.5;
+            margin-bottom: 2.25rem;
+        }
+
+        .phil-rule {
+            width: 44px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--honey), transparent);
+            margin: 0 auto 1.4rem;
+        }
+
+        .phil-byline {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--toffee-lt);
+            margin-bottom: 2.25rem;
+        }
+
+        .phil-body { font-size: 1rem; color: var(--muted); line-height: 1.95; }
+
+        #portfolio { background: var(--linen); border-bottom: 1px solid var(--linen-bdr); }
+
+        .port-feature {
+            background: var(--white);
+            border: 1px solid var(--linen-bdr);
+            border-top: 4px solid var(--honey);
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2.5rem;
+            align-items: start;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s;
+        }
+
+        .port-feature:hover { box-shadow: var(--shadow-md); }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--sage-lt);
+            color: var(--sage);
+            border: 1px solid var(--sage);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 0.28rem 0.85rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .live-dot {
+            width: 6px; height: 6px;
+            background: var(--sage);
+            border-radius: 50%;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+        .port-kicker {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.45rem;
+        }
+
+        .port-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--toffee);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .port-desc { font-size: 0.96rem; color: var(--body); line-height: 1.9; max-width: 680px; }
+        .port-launch { display:flex; flex-direction:column; gap:0.6rem; align-items:flex-end; min-width:140px; }
+        .port-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+
+        .port-card {
+            background: var(--white);
+            border: 1px solid var(--linen-bdr);
+            border-radius: 6px;
+            padding: 2.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .port-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+
+        .port-card:nth-child(1)::before { background: var(--honey); }
+        .port-card:nth-child(2)::before { background: var(--sage); }
+        .port-card:nth-child(3)::before { background: var(--sienna); }
+        .port-card:nth-child(4)::before { background: var(--slate); }
+        .port-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--linen-deep); }
+
+        .card-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 0.28rem 0.75rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .label-honey { background: var(--honey-pale); color: var(--honey); }
+        .label-sage  { background: var(--sage-lt);    color: var(--sage);  }
+        .label-sienna{ background: var(--sienna-pale); color: var(--sienna); }
+        .label-slate { background: #e8eef4; color: var(--slate); }
+
+        .card-kicker { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
+        .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--toffee); line-height: 1.3; margin-bottom: 0.85rem; }
+        .card-desc { font-size: 0.88rem; color: var(--body); line-height: 1.85; }
+
+        #qr { background: var(--honey-pale); border-top: 1px solid #e2cda0; border-bottom: 1px solid #e2cda0; text-align: center; }
+
+        .qr-intro { font-size: 1rem; color: var(--muted); max-width: 480px; margin: -2rem auto 3.5rem; line-height: 1.85; }
+        .qr-row { display:flex; justify-content:center; gap:5rem; flex-wrap:wrap; }
+        .qr-unit { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+
+        .qr-frame {
+            background: var(--white);
+            border: 1px solid var(--linen-bdr);
+            border-radius: 8px;
+            padding: 1.4rem;
+            box-shadow: var(--shadow-sm);
+            line-height: 0;
+        }
+
+        .qr-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--toffee); }
+        .qr-sub { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+        .qr-url { font-size: 0.72rem; color: var(--honey); font-weight: 600; }
+
+        #contact { background: var(--slate); padding: 6rem 4rem; position: relative; overflow: hidden; }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 80% at 50% 110%, rgba(201,140,48,0.14) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .contact-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .c-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--honey-lt); margin-bottom: 0.65rem; }
+        .c-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 0.65rem; }
+        .c-email { font-size: 1rem; color: var(--honey-lt); text-decoration: none; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+        .c-email:hover { color: #f5c276; }
+
+        footer {
+            background: var(--linen);
+            border-top: 3px solid var(--honey);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; font-style: italic; color: var(--toffee); }
+        .footer-copy { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
+
+        .reveal { opacity:0; transform:translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        @keyframes riseIn {
+            from { opacity:0; transform:translateY(22px); }
+            to   { opacity:1; transform:none; }
+        }
+
+        @media(max-width:860px){
+            nav { padding:1rem 1.5rem; }
+            .nav-links { display:none; }
+            section { padding:4.5rem 1.5rem; }
+            #hero { padding:7rem 1.5rem 5rem; }
+            .hero-inner { grid-template-columns:1fr; gap:3rem; }
+            .hero-panels { flex-direction:row; flex-wrap:wrap; }
+            .hero-panel { flex:1; min-width:140px; }
+            .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+            .port-feature { grid-template-columns:1fr; }
+            .port-launch { align-items:flex-start; }
+            .port-grid { grid-template-columns:1fr; }
+            .qr-row { gap:3rem; }
+            #contact { padding:4rem 1.5rem; }
+            footer { padding:1.25rem 1.5rem; flex-direction:column; align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-brand">Catrina <em>Wright</em></div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#qr">Connect</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-eyebrow">Special Educator &nbsp;·&nbsp; LBS1 Candidate &nbsp;·&nbsp; IDD Transition Specialist</div>
+            <h1 class="hero-name">Catrina<br><em>Wright</em></h1>
+            <div class="hero-divider"></div>
+            <div class="hero-credential">MAT Candidate &nbsp;·&nbsp; National Louis University / CPS Teacher Residency &nbsp;·&nbsp; 2026</div>
+            <p class="hero-tagline">I design rigorous, evidence-based vocational instruction for transition-age students with intellectual and developmental disabilities — because independence is not a destination. It is a skill set, and I know how to teach it.</p>
+            <div class="hero-cta">
+                <a href="YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE" class="btn btn-honey" target="_blank">View Resume</a>
+                <a href="#portfolio" class="btn btn-ghost">See My Work</a>
+                <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+            </div>
+            <span class="resume-note">Replace YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE with your Google Drive share link before using.</span>
+        </div>
+        <div class="hero-panels">
+            <div class="hero-panel">
+                <div class="panel-val">18-22</div>
+                <div class="panel-desc">Transition-age students with intellectual and developmental disabilities</div>
+            </div>
+            <div class="hero-panel">
+                <div class="panel-val">LBS1</div>
+                <div class="panel-desc">Learning Behavior Specialist I endorsement candidate</div>
+            </div>
+            <div class="hero-panel">
+                <div class="panel-val">UDL</div>
+                <div class="panel-desc">Universal Design for Learning applied across all instruction and materials</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div>
+                <div class="section-tag reveal">Professional Background</div>
+                <h2 class="section-heading reveal">Not a Career Change.<br>A Career Convergence.</h2>
+                <div class="about-copy reveal">
+                    <p>My path to special education is not a career change. It is a career convergence. Every role I held before the classroom — Research Assistant at the University of Chicago, Probation Officer Intern at Cook County, Criminal Justice and Psychology scholar at Chicago State University — was building the same core competency: reading complex systems, advocating for vulnerable people inside those systems, and making evidence-based decisions under pressure. That is precisely what LBS1 special education requires.</p>
+                    <p>My research background instilled the analytical rigor that now drives my instructional practice — progress monitoring, data-driven IEP goal-setting, and systematic instruction design built on the same discipline as empirical inquiry. My psychology minor provided the behavioral and developmental foundation that informs how I read student behavior, design interventions, and apply FBA frameworks in real time. My time inside the Cook County criminal justice system — where documentation errors carry real consequences and institutional compliance and human dignity are in constant tension — prepared me for the legal and ethical weight of special education in ways that traditional teacher preparation programs cannot replicate.</p>
+                    <p>Today, I am completing a Master of Arts in Teaching with an LBS1 endorsement through the Chicago Public Schools Teacher Residency Program at National Louis University. My classroom at Ray Graham Training Center High School is a vocational simulation lab for transition-age students (ages 18-22) with intellectual and developmental disabilities. I arrived at this work equipped — not just credentialed.</p>
+                </div>
+            </div>
+            <div class="about-creds reveal">
+                <div class="cred-tile">
+                    <div class="cred-label">Credential in Progress</div>
+                    <div class="cred-text">Master of Arts in Teaching · LBS1 Endorsement · National Louis University · June 2026</div>
+                </div>
+                <div class="cred-tile">
+                    <div class="cred-label">Prior Experience</div>
+                    <div class="cred-text">University of Chicago Research Assistant · Cook County Probation Officer Intern · Chicago State University — BS, Criminal Justice; Minor, Psychology</div>
+                </div>
+                <div class="cred-tile">
+                    <div class="cred-label">Instructional Focus</div>
+                    <div class="cred-text">Systematic instruction · UDL design · Vocational and transition programming · Multi-tiered differentiation · Complex communication profiles</div>
+                </div>
+                <div class="cred-tile">
+                    <div class="cred-label">Target Placement</div>
+                    <div class="cred-text">LBS1 Special Education Teacher · Chicago Public Schools · Classroom-based</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="philosophy">
+    <div class="phil-inner">
+        <div class="phil-tag reveal">Teaching Philosophy</div>
+        <div class="phil-ornament reveal">"</div>
+        <blockquote class="phil-quote reveal">
+            I don't want to give them a dream.<br>
+            I want to equip them to pursue<br>
+            the ones they already have.
+        </blockquote>
+        <div class="phil-rule reveal"></div>
+        <p class="phil-byline reveal">-- Catrina Wright</p>
+        <p class="phil-body reveal">This principle drives every instructional decision I make — from UDL-based materials design to systematic instruction frameworks built for genuine independence, not performance. Every student I teach enters with capacity. My role is to construct the bridge between their potential and their execution.</p>
+    </div>
+</section>
+
+<section id="portfolio">
+    <div class="container">
+        <div class="section-tag reveal">Selected Work</div>
+        <h2 class="section-heading reveal">Instructional Design Portfolio</h2>
+
+        <div class="port-feature reveal">
+            <div>
+                <div class="live-badge"><span class="live-dot"></span> Live Application</div>
+                <div class="port-kicker">Interactive Web Application · Parent and Family Advocacy Tool</div>
+                <div class="port-title">IEP Jargon Tool</div>
+                <p class="port-desc">I built this fully coded, mobile-responsive digital dashboard to replace the static, overwhelming paper packets that routinely alienate families from the IEP process. It features six color-coded branches: IDEA Basics, the Endrew F. Standard, SEL and Safety, a dynamic searchable Traffic Light Glossary (Red = Rights · Yellow = Process · Green = Instruction), Advocacy Action Loops, and verifiable legal sources. I designed it in plain language with high-contrast visuals and intuitive navigation — accessible on any phone or computer via a single link. This is not a handout. It is an application.</p>
+            </div>
+            <div class="port-launch">
+                <a href="https://wz7dzh.csb.app/" class="btn btn-honey" target="_blank">Launch App</a>
+            </div>
+        </div>
+
+        <div class="port-grid">
+            <div class="port-card reveal">
+                <div class="card-label label-honey">Vocational Curriculum</div>
+                <div class="card-kicker">5-Week Unit · Hospitality Industry Training</div>
+                <div class="card-title">Sports Arena Concessions Unit</div>
+                <p class="card-desc">I designed this fully scripted, UDL-differentiated five-week instructional unit to simulate five distinct arena job roles across three differentiation tiers. I built it with zero materials budget, no paraprofessional support, and a 100-minute daily block — applying systematic instruction, evidence-based accommodation design, and real-world vocational application for students with IDD.</p>
+            </div>
+            <div class="port-card reveal">
+                <div class="card-label label-sage">SEL Curriculum</div>
+                <div class="card-kicker">Original Unit · Mixed IDD Classroom</div>
+                <div class="card-title">Navigating My Environment</div>
+                <p class="card-desc">I developed this original social-emotional learning unit by adapting T.D. Jakes' internal-external framework for a mixed IDD classroom. It addresses self-regulation, environmental navigation, and self-advocacy — the foundational competencies that determine my students' post-secondary integration, community participation, and long-term independence outcomes.</p>
+            </div>
+            <div class="port-card reveal">
+                <div class="card-label label-sienna">Assessment Design</div>
+                <div class="card-kicker">Tiered Instrument · UDL-Grounded</div>
+                <div class="card-title">UDL Data Collection System</div>
+                <p class="card-desc">I created this single-page landscape data collection instrument specifically for complex, differentiated classrooms like mine. It features modality columns, embedded checkpoint rows, and individual student-level tracking — engineered for classrooms with diverse communication profiles and no administrative support infrastructure.</p>
+            </div>
+            <div class="port-card reveal">
+                <div class="card-label label-slate">Instructional Framework</div>
+                <div class="card-kicker">Reusable Routine · Evidence-Based Design</div>
+                <div class="card-title">Systematic Instruction Framework</div>
+                <p class="card-desc">I built this reusable 100-minute instructional routine on systematic instruction and explicit teaching principles. It functions across content areas and student configurations, with embedded UDL supports and consistent structure that reduces my students' cognitive load while increasing instructional efficiency and measurable independence.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="qr">
+    <div class="container">
+        <div class="section-tag reveal">Quick Access</div>
+        <h2 class="section-heading reveal">Scan to Connect</h2>
+        <p class="qr-intro reveal">Two direct entry points — accessible from any device, at any interview, job fair, or chance meeting.</p>
+        <div class="qr-row">
+            <div class="qr-unit reveal">
+                <div class="qr-frame" id="qr-iep"></div>
+                <div class="qr-name">IEP Jargon Tool</div>
+                <div class="qr-sub">Live Interactive Application</div>
+                <div class="qr-url">wz7dzh.csb.app</div>
+            </div>
+            <div class="qr-unit reveal">
+                <div class="qr-frame" id="qr-profile"></div>
+                <div class="qr-name">Full Professional Profile</div>
+                <div class="qr-sub">Portfolio · Philosophy · Contact</div>
+                <div class="qr-url" id="profile-url-label">catrinawright.github.io/Catrina-wright/</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact-inner">
+        <div class="reveal">
+            <div class="c-tag">Get in Touch</div>
+            <div class="c-headline">I am ready to bring this work<br>into your school.</div>
+            <a href="#" id="contact-email-link" class="c-email">Cwright64@cps.edu</a>
+        </div>
+        <div class="reveal">
+            <a href="YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE" class="btn btn-honey" target="_blank">Download Resume</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-name">Catrina Wright</div>
+    <div class="footer-copy">Special Educator · LBS1 Candidate · Chicago, IL · 2026</div>
+</footer>
+
+<script>
+    var u = 'Cwright64' + '@' + 'cps.edu';
+    document.getElementById('contact-email-link').href = 'mailto:' + u;
+
+    new QRCode(document.getElementById('qr-iep'), {
+        text: 'https://wz7dzh.csb.app/',
+        width: 160, height: 160,
+        colorDark: '#7a4f2d',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById('qr-profile'), {
+        text: 'https://catrinawright.github.io/Catrina-wright/',
+        width: 160, height: 160,
+        colorDark: '#7a4f2d',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e, i) {
+            if (e.isIntersecting) {
+                setTimeout(function() { e.target.classList.add('visible'); }, i * 65);
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.07 });
+    els.forEach(function(el) { io.observe(el); });
+
+    setTimeout(function() {
+        document.querySelectorAll('.reveal').forEach(function(el) {
+            el.classList.add('visible');
+        });
+    }, 800);
+</script>
+</body>
+</html>
